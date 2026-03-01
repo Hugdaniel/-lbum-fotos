@@ -1,7 +1,7 @@
 const CONFIG = {
     nombreEvento: "EL CUMPLE DE DIEGO",
     personajeImg: "assets/diego-skin.png", // La imagen del nene que generamos
-    fondoImg: "assets/bg-mc.jpg", // La jungla que generamos
+    fondoImg: "assets/bg-mc.png", // La jungla que generamos
     // Aquí pondrás los nombres de los archivos que subas a GitHub
     fotos: [
         "pics 1.jpg",
@@ -16,3 +16,4 @@ const CONFIG = {
         "pics 10.jpg",
     ]
 };
+
