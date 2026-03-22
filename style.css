@@ -1,53 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+/*
+  ╔════════════════════════════════════════════════╗
+  ║  estilos.css — Álbum de Fotos Cumple Minecraft ║
+  ╚════════════════════════════════════════════════╝
+*/
 
+/* ══ 1. VARIABLES DE COLOR ══ */
 :root {
-  --grass:   #5D9E3A;
-  --grass-l: #7DC44A;
-  --grass-d: #3A7A20;
-  --dirt:    #866043;
-  --dirt-d:  #5A3A1A;
-  --stone:   #7A7A7A;
-  --stone-l: #AAAAAA;
-  --diamond: #4AEFEA;
+  --grass:     #5D9E3A;
+  --grass-l:   #7DC44A;
+  --grass-d:   #3A7A20;
+  --diamond:   #4AEFEA;
   --diamond-d: #00AAAA;
-  --gold:    #FECD2D;
-  --gold-d:  #A07800;
-  --sky:     #78C8FF;
-  --night:   #0D1F3C;
-  --panel:   #2A2A2A;
-  --panel-l: #3C3C3C;
-  --panel-d: #1A1A1A;
-  --red:     #CC3333;
-  --red-l:   #FF5555;
-  --heart:   #FF4466;
-  --creeper: #55AA33;
-  --white:   #EEEEEE;
+  --gold:      #FECD2D;
+  --gold-d:    #A07800;
+  --night:     #0D1F3C;
+  --panel-l:   #3C3C3C;
+  --panel-d:   #1A1A1A;
+  --red:       #CC3333;
+  --red-l:     #FF5555;
+  --heart:     #FF4466;
+  --white:     #EEEEEE;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
+/* ══ 2. RESET Y BASE ══ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html,body{
-  height:100%;
-  font-family:'Press Start 2P',monospace;
-  background:var(--night);
-  color:var(--white);
-  overflow-x:hidden;
+html, body {
+  height: 100%;
+  font-family: 'Press Start 2P', monospace;
+  background: var(--night);
+  color: var(--white);
+  overflow-x: hidden;
 }
 
-/* ── SKY ── */
-body::before{
-  content:'';
-  position:fixed;inset:0;z-index:-2;
+/* ══ 3. FONDO: cielo nocturno ══ */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -2;
   background:
     radial-gradient(ellipse 60% 40% at 15% 20%, rgba(120,200,255,.13) 0%, transparent 70%),
     radial-gradient(ellipse 40% 30% at 85% 10%, rgba(254,205,45,.07) 0%, transparent 60%),
-    linear-gradient(170deg,#060E1E 0%,#0D1F3C 45%,#071810 100%);
+    linear-gradient(170deg, #060E1E 0%, #0D1F3C 45%, #071810 100%);
 }
 
-/* ── STARS ── */
-body::after{
-  content:'';
-  position:fixed;inset:0;z-index:-1;pointer-events:none;
+/* Estrellas */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background-image:
     radial-gradient(1px 1px at  8% 12%, #fff, transparent),
     radial-gradient(1px 1px at 22%  6%, #fff, transparent),
@@ -60,315 +59,371 @@ body::after{
     radial-gradient(1px 1px at 45% 35%, #fff, transparent);
 }
 
-/* ── LAYOUT ── */
-.page{ max-width:640px; margin:0 auto; padding:0 12px 48px; }
+/* ══ 4. LAYOUT ══ */
+.page { max-width: 640px; margin: 0 auto; padding: 0 12px 48px; }
 
-/* ── HEADER ── */
-.header{
-  text-align:center;
-  padding:28px 12px 16px;
-  position:relative;
-}
-.header-creeper{
-  font-size:52px;
-  display:block;
-  animation:bounce 2.2s ease-in-out infinite;
-  filter:drop-shadow(0 4px 12px rgba(85,170,51,.5));
-}
-@keyframes bounce{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+/* ══ 5. HEADER ══ */
+.header { text-align: center; padding: 28px 12px 16px; }
 
-.header h1{
-  font-size:clamp(9px,2.8vw,15px);
-  color:var(--gold);
-  text-shadow:3px 3px 0 var(--gold-d), 0 0 20px rgba(254,205,45,.3);
-  line-height:1.8;
-  letter-spacing:1px;
-  margin-top:6px;
-}
-.header-sub{
-  font-family:'VT323',monospace;
-  font-size:22px;
-  color:var(--diamond);
-  margin-top:6px;
-  text-shadow:2px 2px 0 rgba(0,0,0,.5);
+.header-creeper {
+  font-size: 52px; display: block;
+  animation: bounce 2.2s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(85,170,51,.5));
 }
 
-/* ── PIXEL DIVIDER ── */
-.divider{
-  height:16px;
-  background:repeating-linear-gradient(90deg,
-    var(--grass) 0,var(--grass) 16px,
-    var(--grass-l) 16px,var(--grass-l) 32px);
-  border-top:4px solid var(--grass-d);
-  border-bottom:4px solid var(--grass-d);
-  margin:6px 0;
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%       { transform: translateY(-10px) rotate(2deg); }
 }
 
-/* ── PANEL ── */
-.mc-panel{
-  background:var(--panel-l);
-  border:3px solid #000;
-  box-shadow:inset -3px -3px 0 var(--panel-d), inset 3px 3px 0 #5A5A5A, 0 6px 0 #000;
-  padding:18px 16px;
-  margin:16px 0;
-  border-radius:2px;
-}
-.mc-panel h2{
-  font-size:10px;
-  color:var(--gold);
-  text-shadow:2px 2px 0 var(--gold-d);
-  margin-bottom:14px;
-  text-align:center;
+.header h1 {
+  font-size: clamp(9px, 2.8vw, 15px);
+  color: var(--gold);
+  text-shadow: 3px 3px 0 var(--gold-d), 0 0 20px rgba(254,205,45,.3);
+  line-height: 1.8; letter-spacing: 1px; margin-top: 6px;
 }
 
-/* ── UPLOAD ZONE ── */
-.drop-zone{
-  border:4px dashed var(--grass);
-  background:rgba(93,158,58,.08);
-  border-radius:2px;
-  padding:22px 16px;
-  text-align:center;
-  cursor:pointer;
-  transition:all .2s;
-  position:relative;
-  overflow:hidden;
-}
-.drop-zone:hover,.drop-zone.over{
-  background:rgba(93,158,58,.22);
-  border-color:var(--gold);
-}
-.drop-zone input[type=file]{
-  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
-}
-.drop-icon{font-size:38px;display:block;margin-bottom:8px;}
-.drop-zone p{font-family:'VT323',monospace;font-size:20px;color:#CCC;line-height:1.5;}
-.drop-hint{font-size:14px!important;color:var(--diamond)!important;margin-top:4px;}
-
-/* ── PREVIEW ── */
-#preview-wrap{display:none;margin-top:12px;text-align:center;}
-#preview-img{
-  max-width:100%;max-height:200px;
-  border:4px solid var(--grass);
-  box-shadow:4px 4px 0 #000;
-}
-#file-info{
-  font-family:'VT323',monospace;font-size:15px;
-  color:var(--diamond);margin-top:6px;line-height:1.5;
+.header-sub {
+  font-family: 'VT323', monospace; font-size: 22px;
+  color: var(--diamond); margin-top: 6px;
+  text-shadow: 2px 2px 0 rgba(0,0,0,.5);
 }
 
-/* ── INPUTS ── */
-.field{margin-top:12px;}
-.field label{display:block;font-size:8px;color:#AAA;margin-bottom:5px;}
-.mc-input{
-  width:100%;
-  background:var(--panel-d);
-  border:3px solid #555;
-  box-shadow:inset 2px 2px 0 #000;
-  color:#FFF;
-  font-family:'VT323',monospace;font-size:20px;
-  padding:9px 12px;outline:none;
-  transition:border-color .2s;
-  border-radius:1px;
-}
-.mc-input:focus{border-color:var(--diamond);}
-
-/* ── BUTTONS ── */
-.mc-btn{
-  display:block;width:100%;margin-top:12px;
-  padding:13px;
-  background:var(--grass);
-  border:none;
-  border-top:4px solid var(--grass-l);
-  border-left:4px solid var(--grass-l);
-  border-right:4px solid var(--grass-d);
-  border-bottom:4px solid var(--grass-d);
-  color:#FFF;
-  font-family:'Press Start 2P',monospace;font-size:10px;
-  cursor:pointer;letter-spacing:1px;
-  text-shadow:2px 2px 0 #000;
-  transition:filter .1s;
-  text-transform:uppercase;
-}
-.mc-btn:hover{filter:brightness(1.12);}
-.mc-btn:active{
-  border-top-color:var(--grass-d);border-left-color:var(--grass-d);
-  border-right-color:var(--grass-l);border-bottom-color:var(--grass-l);
-  transform:translate(2px,2px);
-}
-.mc-btn:disabled{
-  background:#555;border-color:#333 #777 #777 #333;
-  cursor:not-allowed;filter:none;transform:none;
-}
-.mc-btn.diamond{
-  background:var(--diamond-d);
-  border-top-color:var(--diamond);border-left-color:var(--diamond);
-  border-right-color:#004444;border-bottom-color:#004444;
-}
-.mc-btn.gold{
-  background:#B07800;
-  border-top-color:var(--gold);border-left-color:var(--gold);
-  border-right-color:#604000;border-bottom-color:#604000;
+/* ══ 6. DIVISOR PIXELADO ══ */
+.divider {
+  height: 16px;
+  background: repeating-linear-gradient(90deg,
+    var(--grass) 0, var(--grass) 16px,
+    var(--grass-l) 16px, var(--grass-l) 32px);
+  border-top: 4px solid var(--grass-d);
+  border-bottom: 4px solid var(--grass-d);
+  margin: 6px 0;
 }
 
-/* ── PROGRESS ── */
-#progress-wrap{display:none;margin-top:12px;}
-.prog-label{font-family:'VT323',monospace;font-size:17px;color:var(--diamond);margin-bottom:4px;}
-.prog-outer{background:var(--panel-d);border:3px solid #555;height:22px;overflow:hidden;}
-.prog-inner{
-  height:100%;width:0%;transition:width .35s;
-  background:repeating-linear-gradient(90deg,
-    var(--grass) 0,var(--grass) 12px,
-    var(--grass-d) 12px,var(--grass-d) 16px);
-  box-shadow:0 0 10px var(--grass);
+/* ══ 7. PANEL ══ */
+.mc-panel {
+  background: var(--panel-l);
+  border: 3px solid #000;
+  box-shadow: inset -3px -3px 0 var(--panel-d), inset 3px 3px 0 #5A5A5A, 0 6px 0 #000;
+  padding: 18px 16px; margin: 16px 0; border-radius: 2px;
 }
 
-/* ── ALBUM HEADER ── */
-.album-top{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:8px;
-  margin:18px 0 10px;
-}
-.album-top h2{font-size:10px;color:var(--gold);text-shadow:2px 2px 0 var(--gold-d);}
-#photo-count{
-  font-family:'VT323',monospace;font-size:17px;color:var(--diamond);
+.mc-panel h2 {
+  font-size: 10px; color: var(--gold);
+  text-shadow: 2px 2px 0 var(--gold-d);
+  margin-bottom: 14px; text-align: center;
 }
 
-.top-btns{display:flex;gap:8px;flex-wrap:wrap;}
-.sm-btn{
-  padding:8px 12px;
-  background:transparent;
-  font-family:'Press Start 2P',monospace;font-size:7px;
-  cursor:pointer;letter-spacing:.5px;
-  text-shadow:1px 1px 0 #000;
-  border:3px solid currentColor;
-  transition:background .15s;
-}
-.sm-btn.refresh{color:var(--diamond);}
-.sm-btn.refresh:hover{background:rgba(74,239,234,.12);}
-.sm-btn.download{color:var(--gold);}
-.sm-btn.download:hover{background:rgba(254,205,45,.12);}
-.sm-btn:disabled{opacity:.4;cursor:not-allowed;}
-
-/* ── GRID ── */
-#photo-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:10px;
+/* ══ 8. ZONA DE DROP ══ */
+.drop-zone {
+  border: 4px dashed var(--grass);
+  background: rgba(93,158,58,.08);
+  border-radius: 2px; padding: 22px 16px;
+  text-align: center; cursor: pointer;
+  transition: all .2s; position: relative; overflow: hidden;
 }
 
-/* ── PHOTO CARD ── */
-.card{
-  background:var(--panel-l);
-  border:3px solid #000;
-  box-shadow:4px 4px 0 #000;
-  overflow:hidden;
-  cursor:pointer;
-  transition:transform .15s,box-shadow .15s;
-  animation:pop .3s ease-out;
-}
-@keyframes pop{
-  0%{transform:scale(.6) rotate(-4deg);opacity:0;}
-  80%{transform:scale(1.04) rotate(1deg);}
-  100%{transform:scale(1) rotate(0);opacity:1;}
-}
-.card:hover{transform:translateY(-5px) scale(1.02);box-shadow:6px 9px 0 #000;}
-.card-thumb{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
-.card-footer{
-  background:var(--panel-d);
-  border-top:2px solid #555;
-  padding:6px 8px 4px;
-}
-.card-name{
-  font-family:'VT323',monospace;font-size:15px;color:#FFF;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.card-meta{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:3px;
-}
-.card-date{font-family:'VT323',monospace;font-size:12px;color:#666;}
-.like-btn{
-  background:none;border:none;cursor:pointer;
-  font-family:'VT323',monospace;font-size:15px;
-  color:var(--heart);padding:0;
-  transition:transform .15s;
-  display:flex;align-items:center;gap:3px;
-}
-.like-btn:hover{transform:scale(1.25);}
-.like-btn.liked .heart{animation:heartbeat .3s ease-out;}
-@keyframes heartbeat{0%{transform:scale(1);}50%{transform:scale(1.5);}100%{transform:scale(1);}}
-
-/* ── EMPTY / LOADING ── */
-#empty-state,#loading-state{
-  grid-column:1/-1;
-  text-align:center;
-  padding:40px 20px;
-  font-family:'VT323',monospace;font-size:20px;
-  color:#555;line-height:1.9;
-}
-#loading-state{color:var(--diamond);}
-
-/* ── SPINNER ── */
-.spinner{
-  display:inline-block;width:14px;height:14px;
-  background:var(--grass);
-  animation:spin .5s steps(4) infinite;
-  vertical-align:middle;margin-right:6px;
-}
-@keyframes spin{to{transform:rotate(360deg);}}
-
-/* ── LIGHTBOX ── */
-#lightbox{
-  display:none;position:fixed;inset:0;z-index:200;
-  background:rgba(0,0,0,.93);
-  flex-direction:column;align-items:center;justify-content:center;
-  padding:16px;
-}
-#lightbox.open{display:flex;}
-#lb-img{
-  max-width:92vw;max-height:68vh;
-  border:4px solid var(--gold);
-  box-shadow:0 0 40px rgba(254,205,45,.25);
-}
-#lb-info{
-  font-family:'VT323',monospace;font-size:20px;
-  color:var(--gold);margin-top:10px;text-align:center;
-  text-shadow:2px 2px 0 #000;
-}
-#lb-likes{color:var(--heart);font-family:'VT323',monospace;font-size:18px;margin-top:4px;}
-#lb-close{
-  position:fixed;top:14px;right:14px;
-  background:var(--red);
-  border:3px solid #000;
-  border-top:3px solid var(--red-l);border-left:3px solid var(--red-l);
-  color:#FFF;font-family:'Press Start 2P',monospace;font-size:12px;
-  padding:8px 12px;cursor:pointer;
+.drop-zone:hover, .drop-zone.over {
+  background: rgba(93,158,58,.22);
+  border-color: var(--gold);
 }
 
-/* ── TOAST ── */
-#toast{
-  position:fixed;bottom:18px;left:50%;
-  transform:translateX(-50%) translateY(120px);
-  background:var(--panel-d);
-  border:3px solid var(--grass);
-  box-shadow:4px 4px 0 #000;
-  padding:11px 20px;
-  font-family:'VT323',monospace;font-size:18px;
-  color:#FFF;z-index:999;
-  transition:transform .3s;
-  text-align:center;max-width:320px;
-  pointer-events:none;
+/* El input real es invisible y cubre todo el área */
+.drop-zone input[type=file] {
+  position: absolute; inset: 0;
+  opacity: 0; cursor: pointer; width: 100%; height: 100%;
 }
-#toast.show{transform:translateX(-50%) translateY(0);}
-#toast.ok{border-color:var(--diamond);}
-#toast.err{border-color:var(--red);}
 
-/* ── GRASS FLOOR ── */
-.floor-grass{
-  position:fixed;bottom:0;left:0;right:0;height:14px;
-  background:repeating-linear-gradient(90deg,
-    var(--grass) 0,var(--grass) 16px,
-    var(--grass-l) 16px,var(--grass-l) 32px);
-  border-top:4px solid var(--grass-d);
-  z-index:50;
+.drop-icon { font-size: 38px; display: block; margin-bottom: 8px; }
+.drop-zone p { font-family: 'VT323', monospace; font-size: 20px; color: #CCC; line-height: 1.5; }
+.drop-hint { font-size: 14px !important; color: var(--diamond) !important; margin-top: 4px; }
+
+/* ══ 9. PREVIEW ══ */
+#preview-wrap { display: none; margin-top: 12px; text-align: center; }
+
+#preview-img {
+  max-width: 100%; max-height: 200px;
+  border: 4px solid var(--grass); box-shadow: 4px 4px 0 #000;
+}
+
+#file-info {
+  font-family: 'VT323', monospace; font-size: 15px;
+  color: var(--diamond); margin-top: 6px; line-height: 1.5;
+}
+
+/* ══ 10. INPUTS ══ */
+.field { margin-top: 12px; }
+.field label { display: block; font-size: 8px; color: #AAA; margin-bottom: 5px; }
+
+.mc-input {
+  width: 100%; background: var(--panel-d);
+  border: 3px solid #555; box-shadow: inset 2px 2px 0 #000;
+  color: #FFF; font-family: 'VT323', monospace; font-size: 20px;
+  padding: 9px 12px; outline: none;
+  transition: border-color .2s; border-radius: 1px;
+}
+.mc-input:focus { border-color: var(--diamond); }
+
+/* ══ 11. BOTONES ══
+   Truco 3D: borde sup+izq claro (luz), inf+der oscuro (sombra).
+   En :active se invierten → efecto hundido.
+*/
+.mc-btn {
+  display: block; width: 100%; margin-top: 12px;
+  padding: 13px; background: var(--grass); border: none;
+  border-top:    4px solid var(--grass-l);
+  border-left:   4px solid var(--grass-l);
+  border-right:  4px solid var(--grass-d);
+  border-bottom: 4px solid var(--grass-d);
+  color: #FFF; font-family: 'Press Start 2P', monospace; font-size: 10px;
+  cursor: pointer; letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #000; transition: filter .1s; text-transform: uppercase;
+}
+.mc-btn:hover { filter: brightness(1.12); }
+.mc-btn:active {
+  border-top-color: var(--grass-d); border-left-color: var(--grass-d);
+  border-right-color: var(--grass-l); border-bottom-color: var(--grass-l);
+  transform: translate(2px, 2px);
+}
+.mc-btn:disabled {
+  background: #555; border-color: #333 #777 #777 #333;
+  cursor: not-allowed; filter: none; transform: none;
+}
+/* Variante roja para eliminar */
+.mc-btn.red {
+  background: var(--red);
+  border-top-color: var(--red-l); border-left-color: var(--red-l);
+  border-right-color: #881111; border-bottom-color: #881111;
+}
+
+/* Botones pequeños (actualizar / descargar) */
+.top-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.sm-btn {
+  padding: 8px 12px; background: transparent;
+  font-family: 'Press Start 2P', monospace; font-size: 7px;
+  cursor: pointer; letter-spacing: .5px; text-shadow: 1px 1px 0 #000;
+  border: 3px solid currentColor; transition: background .15s;
+}
+.sm-btn.refresh { color: var(--diamond); }
+.sm-btn.refresh:hover { background: rgba(74,239,234,.12); }
+.sm-btn.download { color: var(--gold); }
+.sm-btn.download:hover { background: rgba(254,205,45,.12); }
+.sm-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ══ 12. BARRA DE PROGRESO ══ */
+#progress-wrap { display: none; margin-top: 12px; }
+.prog-label { font-family: 'VT323', monospace; font-size: 17px; color: var(--diamond); margin-bottom: 4px; }
+.prog-outer { background: var(--panel-d); border: 3px solid #555; height: 22px; overflow: hidden; }
+.prog-inner {
+  height: 100%; width: 0%; transition: width .35s;
+  background: repeating-linear-gradient(90deg,
+    var(--grass) 0, var(--grass) 12px,
+    var(--grass-d) 12px, var(--grass-d) 16px);
+  box-shadow: 0 0 10px var(--grass);
+}
+
+/* ══ 13. CABECERA DEL ÁLBUM ══ */
+.album-top {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin: 18px 0 10px;
+}
+.album-top h2 { font-size: 10px; color: var(--gold); text-shadow: 2px 2px 0 var(--gold-d); }
+#photo-count { font-family: 'VT323', monospace; font-size: 17px; color: var(--diamond); }
+
+/* ══ 14. GRILLA DE FOTOS ══ */
+#photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+/* ══ 15. TARJETA DE FOTO ══ */
+.card {
+  background: var(--panel-l); border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000; overflow: hidden; cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  animation: pop .3s ease-out;
+  position: relative; /* para el botón de eliminar */
+}
+
+@keyframes pop {
+  0%   { transform: scale(.6) rotate(-4deg); opacity: 0; }
+  80%  { transform: scale(1.04) rotate(1deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 6px 9px 0 #000; }
+
+/* Al hacer hover sobre la tarjeta, aparece el botón de eliminar */
+.card:hover .card-delete { opacity: 1; }
+
+.card-thumb {
+  width: 100%; aspect-ratio: 1;
+  object-fit: cover; display: block;
+}
+
+.card-footer {
+  background: var(--panel-d); border-top: 2px solid #555; padding: 6px 8px 4px;
+}
+
+.card-name {
+  font-family: 'VT323', monospace; font-size: 15px; color: #FFF;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.card-meta {
+  display: flex; align-items: center; justify-content: space-between; margin-top: 3px;
+}
+
+.card-date { font-family: 'VT323', monospace; font-size: 12px; color: #666; }
+
+/* Botón eliminar sobre la imagen (esquina superior derecha) */
+.card-delete {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(204,51,51,.9);
+  border: 2px solid #000;
+  border-top: 2px solid var(--red-l); border-left: 2px solid var(--red-l);
+  color: #FFF; font-size: 14px;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0; /* oculto, aparece en hover de .card */
+  transition: opacity .2s;
+  z-index: 2;
+}
+.card-delete:hover { background: var(--red); }
+
+/* Like button */
+.like-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: 'VT323', monospace; font-size: 15px;
+  color: var(--heart); padding: 0;
+  transition: transform .15s;
+  display: flex; align-items: center; gap: 3px;
+}
+.like-btn:hover { transform: scale(1.25); }
+.like-btn.liked .heart { animation: heartbeat .3s ease-out; }
+
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/* ══ 16. ESTADOS VACÍO / CARGANDO ══ */
+#empty-state, #loading-state {
+  grid-column: 1 / -1; text-align: center; padding: 40px 20px;
+  font-family: 'VT323', monospace; font-size: 20px;
+  color: #555; line-height: 1.9;
+}
+#loading-state { color: var(--diamond); }
+
+/* ══ 17. SPINNER ══
+   steps(4) da rotación cuadrada estilo pixelado
+   en vez de suave.
+*/
+.spinner {
+  display: inline-block; width: 14px; height: 14px;
+  background: var(--grass);
+  animation: spin .5s steps(4) infinite;
+  vertical-align: middle; margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ══ 18. LIGHTBOX ══ */
+#lightbox {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.93);
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 16px; gap: 8px;
+}
+#lightbox.open { display: flex; }
+
+#lb-img {
+  max-width: 92vw; max-height: 60vh;
+  border: 4px solid var(--gold);
+  box-shadow: 0 0 40px rgba(254,205,45,.25);
+}
+
+#lb-info {
+  font-family: 'VT323', monospace; font-size: 20px;
+  color: var(--gold); text-align: center; text-shadow: 2px 2px 0 #000;
+}
+
+#lb-likes { color: var(--heart); font-family: 'VT323', monospace; font-size: 18px; }
+
+#lb-close {
+  position: fixed; top: 14px; right: 14px;
+  background: #444; border: 3px solid #000;
+  border-top: 3px solid #777; border-left: 3px solid #777;
+  color: #FFF; font-family: 'Press Start 2P', monospace;
+  font-size: 12px; padding: 8px 12px; cursor: pointer;
+}
+
+/* Botón eliminar dentro del lightbox */
+.lb-delete {
+  background: var(--red);
+  border: none;
+  border-top: 3px solid var(--red-l); border-left: 3px solid var(--red-l);
+  border-right: 3px solid #881111; border-bottom: 3px solid #881111;
+  color: #FFF; font-family: 'Press Start 2P', monospace; font-size: 9px;
+  padding: 10px 18px; cursor: pointer; letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #000; text-transform: uppercase;
+  margin-top: 4px;
+}
+.lb-delete:hover { filter: brightness(1.15); }
+.lb-delete:active { transform: translate(2px, 2px); }
+
+/* ══ 19. MODAL DE CONFIRMACIÓN ══
+   Aparece sobre el lightbox cuando se quiere eliminar.
+   Centrado con flexbox. Oculto por defecto.
+*/
+#confirm-modal {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,.85);
+  align-items: center; justify-content: center; padding: 20px;
+}
+#confirm-modal.open { display: flex; }
+
+.confirm-box {
+  background: var(--panel-l);
+  border: 3px solid #000;
+  box-shadow: inset -3px -3px 0 var(--panel-d), inset 3px 3px 0 #5A5A5A, 0 8px 0 #000;
+  padding: 24px 20px; max-width: 320px; width: 100%; text-align: center;
+}
+
+.confirm-title {
+  font-size: 12px; color: var(--red-l);
+  text-shadow: 2px 2px 0 #000; margin-bottom: 14px;
+}
+
+.confirm-msg {
+  font-family: 'VT323', monospace; font-size: 19px;
+  color: #CCC; line-height: 1.6; margin-bottom: 18px;
+}
+
+.confirm-btns { display: flex; flex-direction: column; gap: 8px; }
+
+/* ══ 20. TOAST ══ */
+#toast {
+  position: fixed; bottom: 18px; left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  background: var(--panel-d); border: 3px solid var(--grass);
+  box-shadow: 4px 4px 0 #000; padding: 11px 20px;
+  font-family: 'VT323', monospace; font-size: 18px;
+  color: #FFF; z-index: 999; transition: transform .3s;
+  text-align: center; max-width: 320px; pointer-events: none;
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+#toast.ok  { border-color: var(--diamond); }
+#toast.err { border-color: var(--red); }
+
+/* ══ 21. PISO DE CÉSPED ══ */
+.floor-grass {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 14px;
+  background: repeating-linear-gradient(90deg,
+    var(--grass) 0, var(--grass) 16px,
+    var(--grass-l) 16px, var(--grass-l) 32px);
+  border-top: 4px solid var(--grass-d); z-index: 50;
 }
