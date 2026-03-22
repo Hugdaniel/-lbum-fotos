@@ -427,3 +427,20 @@ body::after {
     var(--grass-l) 16px, var(--grass-l) 32px);
   border-top: 4px solid var(--grass-d); z-index: 50;
 }
+
+.footer{
+    background-color: var(--panel-d);
+    /* z-index: 51; */
+    font-size: 0.5em;
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+
+
+.footer a{
+    text-decoration: none;
+    color: var(--gold);
+}
