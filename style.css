@@ -442,5 +442,7 @@ body::after {
 
 .footer a{
     text-decoration: none;
-    color: var(--gold);
+    color: var(--white);
+    background-color: var(--grass-d);
+    padding: 6px 13px;
 }
