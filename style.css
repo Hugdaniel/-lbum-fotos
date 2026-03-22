@@ -1,151 +1,374 @@
-/* 1. RESETEO GENERAL */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Fundamental: para que el padding no agrande el ancho de los elementos */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+  --grass:   #5D9E3A;
+  --grass-l: #7DC44A;
+  --grass-d: #3A7A20;
+  --dirt:    #866043;
+  --dirt-d:  #5A3A1A;
+  --stone:   #7A7A7A;
+  --stone-l: #AAAAAA;
+  --diamond: #4AEFEA;
+  --diamond-d: #00AAAA;
+  --gold:    #FECD2D;
+  --gold-d:  #A07800;
+  --sky:     #78C8FF;
+  --night:   #0D1F3C;
+  --panel:   #2A2A2A;
+  --panel-l: #3C3C3C;
+  --panel-d: #1A1A1A;
+  --red:     #CC3333;
+  --red-l:   #FF5555;
+  --heart:   #FF4466;
+  --creeper: #55AA33;
+  --white:   #EEEEEE;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1a1a1a; /* Color de respaldo si la imagen falla */
-    color: white;
-    overflow-x: hidden; /* Evita que la página se mueva hacia los costados */
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html,body{
+  height:100%;
+  font-family:'Press Start 2P',monospace;
+  background:var(--night);
+  color:var(--white);
+  overflow-x:hidden;
 }
 
-/* barra de progreso */
-#loader-minecraft {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #2c2c2c; /* Color del fondo de carga de MC */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Para que esté por encima de TODO */
-    transition: opacity 0.5s ease;
+/* ── SKY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(120,200,255,.13) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 85% 10%, rgba(254,205,45,.07) 0%, transparent 60%),
+    linear-gradient(170deg,#060E1E 0%,#0D1F3C 45%,#071810 100%);
 }
 
-.loader-box {
-    text-align: center;
-    width: 80%;
-    max-width: 400px;
+/* ── STARS ── */
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at  8% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 22%  6%, #fff, transparent),
+    radial-gradient(1px 1px at 38% 18%, #fff, transparent),
+    radial-gradient(2px 2px at 55%  4%, rgba(255,255,255,.7), transparent),
+    radial-gradient(1px 1px at 70% 14%, #fff, transparent),
+    radial-gradient(1px 1px at 88%  9%, #fff, transparent),
+    radial-gradient(1px 1px at 14% 30%, rgba(255,255,255,.5), transparent),
+    radial-gradient(2px 2px at 78% 25%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1px 1px at 45% 35%, #fff, transparent);
 }
 
-.loader-box p {
-    color: #ffffff;
-    font-family: 'Courier New', monospace;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
+/* ── LAYOUT ── */
+.page{ max-width:640px; margin:0 auto; padding:0 12px 48px; }
+
+/* ── HEADER ── */
+.header{
+  text-align:center;
+  padding:28px 12px 16px;
+  position:relative;
+}
+.header-creeper{
+  font-size:52px;
+  display:block;
+  animation:bounce 2.2s ease-in-out infinite;
+  filter:drop-shadow(0 4px 12px rgba(85,170,51,.5));
+}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+
+.header h1{
+  font-size:clamp(9px,2.8vw,15px);
+  color:var(--gold);
+  text-shadow:3px 3px 0 var(--gold-d), 0 0 20px rgba(254,205,45,.3);
+  line-height:1.8;
+  letter-spacing:1px;
+  margin-top:6px;
+}
+.header-sub{
+  font-family:'VT323',monospace;
+  font-size:22px;
+  color:var(--diamond);
+  margin-top:6px;
+  text-shadow:2px 2px 0 rgba(0,0,0,.5);
 }
 
-.barra-carga {
-    width: 100%;
-    height: 20px;
-    background-color: #000;
-    border: 2px solid #555;
+/* ── PIXEL DIVIDER ── */
+.divider{
+  height:16px;
+  background:repeating-linear-gradient(90deg,
+    var(--grass) 0,var(--grass) 16px,
+    var(--grass-l) 16px,var(--grass-l) 32px);
+  border-top:4px solid var(--grass-d);
+  border-bottom:4px solid var(--grass-d);
+  margin:6px 0;
 }
 
-.progreso {
-    height: 100%;
-    width: 0%;
-    background-color: #3dfc3d; /* El verde que venimos usando */
-    animation: cargaMinecraft 3s forwards;
+/* ── PANEL ── */
+.mc-panel{
+  background:var(--panel-l);
+  border:3px solid #000;
+  box-shadow:inset -3px -3px 0 var(--panel-d), inset 3px 3px 0 #5A5A5A, 0 6px 0 #000;
+  padding:18px 16px;
+  margin:16px 0;
+  border-radius:2px;
+}
+.mc-panel h2{
+  font-size:10px;
+  color:var(--gold);
+  text-shadow:2px 2px 0 var(--gold-d);
+  margin-bottom:14px;
+  text-align:center;
 }
 
-/* Animación de la barra */
-@keyframes cargaMinecraft {
-    0% { width: 0%; }
-    20% { width: 10%; }
-    50% { width: 70%; }
-    100% { width: 100%; }
+/* ── UPLOAD ZONE ── */
+.drop-zone{
+  border:4px dashed var(--grass);
+  background:rgba(93,158,58,.08);
+  border-radius:2px;
+  padding:22px 16px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+}
+.drop-zone:hover,.drop-zone.over{
+  background:rgba(93,158,58,.22);
+  border-color:var(--gold);
+}
+.drop-zone input[type=file]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.drop-icon{font-size:38px;display:block;margin-bottom:8px;}
+.drop-zone p{font-family:'VT323',monospace;font-size:20px;color:#CCC;line-height:1.5;}
+.drop-hint{font-size:14px!important;color:var(--diamond)!important;margin-top:4px;}
+
+/* ── PREVIEW ── */
+#preview-wrap{display:none;margin-top:12px;text-align:center;}
+#preview-img{
+  max-width:100%;max-height:200px;
+  border:4px solid var(--grass);
+  box-shadow:4px 4px 0 #000;
+}
+#file-info{
+  font-family:'VT323',monospace;font-size:15px;
+  color:var(--diamond);margin-top:6px;line-height:1.5;
 }
 
-/* 2. EL FONDO DE LA JUNGLA */
-#app {
-    min-height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/bg-mc.png');
-    background-size: cover ;/* Hace que el fondo se estire al ancho de la pantalla, pero mantenga su proporción */
-    background-repeat: no-repeat;
-    background-position: right; /* Para que el fondo se alinee al top y no se corte por abajo */
-    background-attachment: fixed; /* Efecto Parallax: las fotos suben pero el fondo queda quieto */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+/* ── INPUTS ── */
+.field{margin-top:12px;}
+.field label{display:block;font-size:8px;color:#AAA;margin-bottom:5px;}
+.mc-input{
+  width:100%;
+  background:var(--panel-d);
+  border:3px solid #555;
+  box-shadow:inset 2px 2px 0 #000;
+  color:#FFF;
+  font-family:'VT323',monospace;font-size:20px;
+  padding:9px 12px;outline:none;
+  transition:border-color .2s;
+  border-radius:1px;
+}
+.mc-input:focus{border-color:var(--diamond);}
+
+/* ── BUTTONS ── */
+.mc-btn{
+  display:block;width:100%;margin-top:12px;
+  padding:13px;
+  background:var(--grass);
+  border:none;
+  border-top:4px solid var(--grass-l);
+  border-left:4px solid var(--grass-l);
+  border-right:4px solid var(--grass-d);
+  border-bottom:4px solid var(--grass-d);
+  color:#FFF;
+  font-family:'Press Start 2P',monospace;font-size:10px;
+  cursor:pointer;letter-spacing:1px;
+  text-shadow:2px 2px 0 #000;
+  transition:filter .1s;
+  text-transform:uppercase;
+}
+.mc-btn:hover{filter:brightness(1.12);}
+.mc-btn:active{
+  border-top-color:var(--grass-d);border-left-color:var(--grass-d);
+  border-right-color:var(--grass-l);border-bottom-color:var(--grass-l);
+  transform:translate(2px,2px);
+}
+.mc-btn:disabled{
+  background:#555;border-color:#333 #777 #777 #333;
+  cursor:not-allowed;filter:none;transform:none;
+}
+.mc-btn.diamond{
+  background:var(--diamond-d);
+  border-top-color:var(--diamond);border-left-color:var(--diamond);
+  border-right-color:#004444;border-bottom-color:#004444;
+}
+.mc-btn.gold{
+  background:#B07800;
+  border-top-color:var(--gold);border-left-color:var(--gold);
+  border-right-color:#604000;border-bottom-color:#604000;
 }
 
-/* 3. TÍTULOS ESTILO MINECRAFT */
-header {
-    text-align: center;
-    margin-bottom: 30px;
-    text-shadow: 3px 3px 0px #000; /* Efecto de relieve tipo juego */
+/* ── PROGRESS ── */
+#progress-wrap{display:none;margin-top:12px;}
+.prog-label{font-family:'VT323',monospace;font-size:17px;color:var(--diamond);margin-bottom:4px;}
+.prog-outer{background:var(--panel-d);border:3px solid #555;height:22px;overflow:hidden;}
+.prog-inner{
+  height:100%;width:0%;transition:width .35s;
+  background:repeating-linear-gradient(90deg,
+    var(--grass) 0,var(--grass) 12px,
+    var(--grass-d) 12px,var(--grass-d) 16px);
+  box-shadow:0 0 10px var(--grass);
 }
 
-h1 {
-    font-size: 2.5rem;
-    color: #3dfc3d; /* Verde Minecraft */
+/* ── ALBUM HEADER ── */
+.album-top{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;
+  margin:18px 0 10px;
+}
+.album-top h2{font-size:10px;color:var(--gold);text-shadow:2px 2px 0 var(--gold-d);}
+#photo-count{
+  font-family:'VT323',monospace;font-size:17px;color:var(--diamond);
 }
 
-.btn-subir {
-    display: inline-block;
-    background-color: #3dfc3d; /* Verde Minecraft */
-    color: #000;
-    padding: 15px 25px;
-    text-decoration: none;
-    font-weight: bold;
-    border: 4px solid #1e7d1e;
-    margin: 20px 0;
-    text-shadow: none;
+.top-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.sm-btn{
+  padding:8px 12px;
+  background:transparent;
+  font-family:'Press Start 2P',monospace;font-size:7px;
+  cursor:pointer;letter-spacing:.5px;
+  text-shadow:1px 1px 0 #000;
+  border:3px solid currentColor;
+  transition:background .15s;
+}
+.sm-btn.refresh{color:var(--diamond);}
+.sm-btn.refresh:hover{background:rgba(74,239,234,.12);}
+.sm-btn.download{color:var(--gold);}
+.sm-btn.download:hover{background:rgba(254,205,45,.12);}
+.sm-btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ── GRID ── */
+#photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:10px;
 }
 
-.btn-subir:hover {
-    background-color: #2ebc2e;
+/* ── PHOTO CARD ── */
+.card{
+  background:var(--panel-l);
+  border:3px solid #000;
+  box-shadow:4px 4px 0 #000;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .15s,box-shadow .15s;
+  animation:pop .3s ease-out;
+}
+@keyframes pop{
+  0%{transform:scale(.6) rotate(-4deg);opacity:0;}
+  80%{transform:scale(1.04) rotate(1deg);}
+  100%{transform:scale(1) rotate(0);opacity:1;}
+}
+.card:hover{transform:translateY(-5px) scale(1.02);box-shadow:6px 9px 0 #000;}
+.card-thumb{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.card-footer{
+  background:var(--panel-d);
+  border-top:2px solid #555;
+  padding:6px 8px 4px;
+}
+.card-name{
+  font-family:'VT323',monospace;font-size:15px;color:#FFF;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.card-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:3px;
+}
+.card-date{font-family:'VT323',monospace;font-size:12px;color:#666;}
+.like-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'VT323',monospace;font-size:15px;
+  color:var(--heart);padding:0;
+  transition:transform .15s;
+  display:flex;align-items:center;gap:3px;
+}
+.like-btn:hover{transform:scale(1.25);}
+.like-btn.liked .heart{animation:heartbeat .3s ease-out;}
+@keyframes heartbeat{0%{transform:scale(1);}50%{transform:scale(1.5);}100%{transform:scale(1);}}
+
+/* ── EMPTY / LOADING ── */
+#empty-state,#loading-state{
+  grid-column:1/-1;
+  text-align:center;
+  padding:40px 20px;
+  font-family:'VT323',monospace;font-size:20px;
+  color:#555;line-height:1.9;
+}
+#loading-state{color:var(--diamond);}
+
+/* ── SPINNER ── */
+.spinner{
+  display:inline-block;width:14px;height:14px;
+  background:var(--grass);
+  animation:spin .5s steps(4) infinite;
+  vertical-align:middle;margin-right:6px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── LIGHTBOX ── */
+#lightbox{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.93);
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:16px;
+}
+#lightbox.open{display:flex;}
+#lb-img{
+  max-width:92vw;max-height:68vh;
+  border:4px solid var(--gold);
+  box-shadow:0 0 40px rgba(254,205,45,.25);
+}
+#lb-info{
+  font-family:'VT323',monospace;font-size:20px;
+  color:var(--gold);margin-top:10px;text-align:center;
+  text-shadow:2px 2px 0 #000;
+}
+#lb-likes{color:var(--heart);font-family:'VT323',monospace;font-size:18px;margin-top:4px;}
+#lb-close{
+  position:fixed;top:14px;right:14px;
+  background:var(--red);
+  border:3px solid #000;
+  border-top:3px solid var(--red-l);border-left:3px solid var(--red-l);
+  color:#FFF;font-family:'Press Start 2P',monospace;font-size:12px;
+  padding:8px 12px;cursor:pointer;
 }
 
-/* 4. LA GRILLA DE FOTOS (Lo más importante) */
-.grid-fotos {
-    display: grid;
-    /* Crea columnas de al menos 150px que se estiran para llenar el espacio */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px; /* Espacio entre fotos */
-    width: 100%;
-    max-width: 1000px; /* Para que en PC no se estire infinito */
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:18px;left:50%;
+  transform:translateX(-50%) translateY(120px);
+  background:var(--panel-d);
+  border:3px solid var(--grass);
+  box-shadow:4px 4px 0 #000;
+  padding:11px 20px;
+  font-family:'VT323',monospace;font-size:18px;
+  color:#FFF;z-index:999;
+  transition:transform .3s;
+  text-align:center;max-width:320px;
+  pointer-events:none;
 }
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.ok{border-color:var(--diamond);}
+#toast.err{border-color:var(--red);}
 
-/* 5. DISEÑO DE CADA FOTO (Estilo Bloque de Inventario) */
-.foto-item {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Hace que todas las fotos sean cuadradas automáticamente */
-    border: 4px solid #3d3d3d; /* Borde gris oscuro tipo bloque */
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease; /* Para el efecto de clic */
-    will-change: transform; /* Optimiza el rendimiento del efecto de clic */
-}
-
-.foto-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Recorta la foto para que llene el cuadrado sin deformarse */
-}
-
-.foto-item:active {
-    transform: scale(0.95); /* Se achica un poquito al tocarla, da sensación de botón */
-}
-
-/* 6. FOOTER "VISION DESIGN" */
-.footer-autor {
-    margin-top: auto; /* Empuja el footer siempre al final */
-    padding: 40px 0 20px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-}
-
-.footer-autor a {
-    color: #3dfc3d;
-    text-decoration: none;
-    font-weight: bold;
+/* ── GRASS FLOOR ── */
+.floor-grass{
+  position:fixed;bottom:0;left:0;right:0;height:14px;
+  background:repeating-linear-gradient(90deg,
+    var(--grass) 0,var(--grass) 16px,
+    var(--grass-l) 16px,var(--grass-l) 32px);
+  border-top:4px solid var(--grass-d);
+  z-index:50;
 }
